@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Biometric Fingerprint Recognition</title>
+	<style>
+		body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+            background-color: #feffde;
+            font-family: Verdana, sans-serif;
+        }
+
+        h1 {
+            color: rgb(0, 115, 77);
+            text-align: center;
+        }
+        h4, p {
+            font-size: 18px;
+        }
+        h5 {
+            font-size: 22px;
+            color: rgb(216, 0, 0);
+        }
+
+		.container {
+			display: flex;
+			width: 100%;
+			height: 100%;
+			justify-content: center;
+			align-items: center;
+		}
+
+		.left, .right {
+            display: flex;
+            flex-direction: column;
+            width: 45%;
+            height: 90%;
+            align-items: center;
+            justify-content: center;
+            background-color: #fbd9d9;
+            border: 5px solid rgb(39, 39, 39);
+            border-radius: 35px;
+        }
+
+
+		.right {
+			background-color: #d8ffe8;
+		}
+
+		form {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+		}
+
+		input[type="file"] {
+			margin-top: 10px;
+		}
+
+        button {
+            background-color: #2da030;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border: 3px solid rgb(39, 39, 39);
+            border-radius: 35px;
+        }
+
+	</style>
+</head>
+<body>
+	<h1>Biometric Fingerprint Recognition</h1>
+	<div class="container">
+		{% if patient_name %}
+		<div class="left">
+            <h5>Match : {{ match_value }} %</h5>
+			<p>Name : {{ patient_name }}</p>
+            <p>ID : {{ patient_id }}</p>
+			<p>Gender : {{ patient_gender }}</p>
+			<p>Hand : {{ patient_hand }}</p>
+			<p>Finger : {{ patient_finger }}</p>
+			<p>Height : {{ patient_height }} Kg</p>
+			<p>Weight : {{ patient_weight }} cm</p>	
+		</div>
+		{% endif %}
+
+		<div class="right">
+			<form method="POST" enctype="multipart/form-data">
+				{% csrf_token %}
+				<p>
+                <label for="image">Select Image:</label>
+                <br>
+				<input type="file" name="image" id="image">
+                </p>
+                <br><br>
+				<button type="submit">Upload</button>
+			</form>
+		</div>
+	</div>
+</body>
+</html>
